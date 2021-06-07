@@ -1,0 +1,28 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+@Html.AntiForgeryToken()
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" height="256" width="256" alt="kitten">
+
+    <form method="post">
+        <hr />
+        <input type="text" id="txtUserName" name="UserName" placeholder="User Name" value="Katt" />
+        <input type="text" name="Text" placeholder="Text" value="This is an annotation." />
+        <hr />
+        <input type="text" id="txtX" name="X" placeholder="X" />
+        <input type="text" id="txtY" name="Y" placeholder="Y" />
+        <input type="text" id="txtW" name="W" placeholder="W" />
+        <input type="text" id="txtH" name="H" placeholder="H" />
+        <input type="submit" id="btnSend" value="Send" />
+    </form>
+</div>

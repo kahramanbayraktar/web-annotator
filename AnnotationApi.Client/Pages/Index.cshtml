@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="text-center">
+    <div>
+        <img id="img-analysis" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" alt="kitten">
+    </div>
+
+    <div class="text-left">
+        <label id="lblX"></label>
+        <label id="lblY"></label>
+        <label id="lblW"></label>
+        <label id="lblH"></label>
+    </div>
+
+    <div class="form-popup" id="annoForm" method="post">
+        <form action="/Index" class="form-container">
+            <textarea placeholder="Type your annotation" name="Text" required></textarea>
+            <input type="hidden" id="txtX" name="X" />
+            <input type="hidden" id="txtY" name="Y" />
+            <input type="hidden" id="txtW" name="W" />
+            <input type="hidden" id="txtH" name="H" />
+
+            <input type="hidden" id="txtmageUrl" name="TargetId" value="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" />
+
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+        </form>
+    </div>
+</div>
