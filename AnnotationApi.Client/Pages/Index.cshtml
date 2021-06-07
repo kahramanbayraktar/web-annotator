@@ -7,9 +7,22 @@
 @Html.AntiForgeryToken()
 
 <div class="text-center">
-    <div>
-        <img id="img-analysis" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" alt="kitten">
+    <div class="row">
+        <div id="img-container" class="graph col-md-8">
+            <img id="img-analysis" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" alt="kitten">
+        </div>
+        <div class="annotations col-md-4">
+            @foreach (var a in Model.Annotations)
+            {
+                <p class="@(Model.SelectedAnnot?.DbId == a.DbId ? "selected-annot": "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
+                    <a>@a.Body</a>
+                    <a class="btn btn-primary btn-sm float-right" href="">Share</a>
+                </p>
+            }
+        </div>
     </div>
+
+    <canvas id="canvas" width="500" height="500"></canvas>
 
     <div class="text-left">
         <label id="lblX"></label>

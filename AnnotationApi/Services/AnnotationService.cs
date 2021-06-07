@@ -16,9 +16,6 @@ namespace AnnotationApi.Services
             _annotations = database.GetCollection<Annotation>(settings.AnnotationsCollectionName);
         }
 
-        //public List<Annotation> Get() =>
-        //    _annotations.Find(annotation => true).ToList();
-
         public List<Annotation> Get()
         {
             var annotations = _annotations.Find(r => true).ToList();
@@ -31,8 +28,8 @@ namespace AnnotationApi.Services
         public Annotation GetByAnnotation(string id) =>
             _annotations.Find<Annotation>(annotation => annotation.Id == id).FirstOrDefault();
 
-        public Annotation GetByTarget(string id) =>
-            _annotations.Find<Annotation>(annotation => annotation.Target.Id.StartsWith(id)).FirstOrDefault();
+        public List<Annotation> GetByTarget(string id) =>
+            _annotations.Find<Annotation>(annotation => annotation.Target.Id.StartsWith(id)).ToList();
 
         public Annotation Create(Annotation annotation)
         {

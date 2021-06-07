@@ -36,16 +36,16 @@ namespace AnnotationApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Annotation> GetByTarget(string id)
+        public ActionResult<List<Annotation>> GetByTarget(string id)
         {
-            var annotation = _annotationService.GetByTarget(id);
+            var annotations = _annotationService.GetByTarget(id);
 
-            if (annotation == null)
+            if (annotations == null)
             {
                 return NotFound();
             }
 
-            return annotation;
+            return annotations;
         }
 
         [HttpPost]
