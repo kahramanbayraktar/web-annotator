@@ -35,7 +35,6 @@ namespace AnnotationApi.Controllers
             return annotation;
         }
 
-        [HttpGet("{id}")]
         public ActionResult<List<Annotation>> GetByTarget(string id)
         {
             var annotations = _annotationService.GetByTarget(id);
@@ -53,7 +52,7 @@ namespace AnnotationApi.Controllers
         {
             _annotationService.Create(annotation);
 
-            return CreatedAtRoute("GetAnnotation", new { id = annotation.DbId }, annotation);
+            return CreatedAtRoute("GetAnnotation", new { id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId }, annotation);
         }
 
         [HttpPut("{id:length(24)}")]

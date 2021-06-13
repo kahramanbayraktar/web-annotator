@@ -6,43 +6,46 @@
 
 @Html.AntiForgeryToken()
 
-<div class="text-center">
-    <div class="row">
-        <div id="img-container" class="graph col-md-8">
-            <img id="img-analysis" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" alt="kitten">
+@if (Model.TargetId != null)
+{
+    <div class="text-center">
+        <div class="row">
+            <div id="img-container" class="graph col-md-9">
+                <img id="img-analysis" src="@Model.ImageUrl" alt="kitten">
+            </div>
+            <div class="annotations col-md-3">
+                @foreach (var a in Model.Annotations)
+                {
+                    <p class="@(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
+                        <a>@a.Body</a>
+                        <a class="btn btn-primary btn-sm float-right" href="">Share</a>
+                    </p>
+                }
+            </div>
         </div>
-        <div class="annotations col-md-4">
-            @foreach (var a in Model.Annotations)
-            {
-                <p class="@(Model.SelectedAnnot?.DbId == a.DbId ? "selected-annot": "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
-                    <a>@a.Body</a>
-                    <a class="btn btn-primary btn-sm float-right" href="">Share</a>
-                </p>
-            }
+
+        <canvas id="canvas" width="500" height="500"></canvas>
+
+        <div class="text-left">
+            <label id="lblX"></label>
+            <label id="lblY"></label>
+            <label id="lblW"></label>
+            <label id="lblH"></label>
+        </div>
+
+        <div class="form-popup" id="annoForm" method="post">
+            <form action="/Index" class="form-container">
+                <textarea placeholder="Type your annotation" name="Text" required></textarea>
+                <input type="hidden" id="txtX" name="X"/>
+                <input type="hidden" id="txtY" name="Y"/>
+                <input type="hidden" id="txtW" name="W"/>
+                <input type="hidden" id="txtH" name="H"/>
+
+                <input type="hidden" name="TargetId" value="@Model.TargetId"/>
+
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+            </form>
         </div>
     </div>
-
-    <canvas id="canvas" width="500" height="500"></canvas>
-
-    <div class="text-left">
-        <label id="lblX"></label>
-        <label id="lblY"></label>
-        <label id="lblW"></label>
-        <label id="lblH"></label>
-    </div>
-
-    <div class="form-popup" id="annoForm" method="post">
-        <form action="/Index" class="form-container">
-            <textarea placeholder="Type your annotation" name="Text" required></textarea>
-            <input type="hidden" id="txtX" name="X" />
-            <input type="hidden" id="txtY" name="Y" />
-            <input type="hidden" id="txtW" name="W" />
-            <input type="hidden" id="txtH" name="H" />
-
-            <input type="hidden" id="txtmageUrl" name="TargetId" value="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png" />
-
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-        </form>
-    </div>
-</div>
+}

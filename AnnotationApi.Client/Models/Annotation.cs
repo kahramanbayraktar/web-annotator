@@ -13,6 +13,14 @@ namespace AnnotationApi.Client.Models
         public string Type { get; set; }
         public string Body { get; set; }
         public Target Target { get; set; }
+        public Creator Creator { get; set; }
+    }
+
+    public class Creator
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Nick { get; set; }
     }
 
     public class Body

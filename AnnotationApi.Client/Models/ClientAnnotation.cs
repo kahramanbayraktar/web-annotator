@@ -2,7 +2,6 @@
 {
     public class ClientAnnotation
     {
-        public string UserName { get; set; }
         public string TargetId { get; set; }
         public string Text { get; set; }
         public int X { get; set; }

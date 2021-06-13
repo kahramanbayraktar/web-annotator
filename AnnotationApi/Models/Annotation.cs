@@ -1,6 +1,7 @@
-﻿using System.Text.Json.Serialization;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Text.Json.Serialization;
 
 namespace AnnotationApi.Models
 {
@@ -8,12 +9,15 @@ namespace AnnotationApi.Models
     {
         /*
         "@context": "http://www.w3.org/ns/anno.jsonld",
-        "id": "http://example.org/anno2",
-        "type": "Annotation",
+        "id": "https://annotator.api/a/60ba011adf1412fe8345a899", // https://annotatorapi.azurewebsites.net/annotation/get/60ba011adf1412fe8345a899
+        "@type": "Annotation",
+        "body": "This built-in trigger sends an HTTP request to a URL for a Swagger file that describes a REST API and returns a response that contains that file's content.",
+        "created": "2017-11-28T18:56:04.889815+00:00"
         */
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [JsonIgnore]
         public string DbId { get; set; }
 
         [JsonPropertyName("@context")]
@@ -38,6 +42,38 @@ namespace AnnotationApi.Models
 
         [BsonElement("target")]
         public Target Target { get; set; }
+
+        [BsonElement("creator")]
+        public Creator Creator { get; set; }
+
+        [BsonElement("created")]
+        public DateTime Created { get; set; }
+    }
+
+    [BsonNoId]
+    public class Creator
+    {
+        /*
+        "creator": {
+            "id": "http://example.org/user1",
+            "name": "Anne O'Tater",
+            "nick": "Ann0"
+          }
+        */
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonIgnore]
+        public string DbId { get; set; }
+
+        [JsonPropertyName("@id")]
+        [BsonElement("id")]
+        public string Id { get; set; }
+
+        [BsonElement("name")]
+        public string Name { get; set; }
+
+        [BsonElement("nick")]
+        public string Nick { get; set; }
     }
 
     [BsonNoId]
@@ -65,11 +101,9 @@ namespace AnnotationApi.Models
     {
         /*
         "target": {
-            "id": "http://example.gov/patent1.pdf",
-            "format": "application/pdf",
-            "language": ["en", "ar"],
-            "textDirection": "ltr",
-            "processingLanguage": "en"
+            "@id": "https://analysis.app/analysis/1?xywh=39,18,172,96",
+            "@type": "Image",
+            "format": "image/jpeg"
         }
         */
 
@@ -84,14 +118,5 @@ namespace AnnotationApi.Models
         [JsonPropertyName("format")]
         [BsonElement("format")]
         public string Format { get; set; }
-
-        //[BsonElement("language")]
-        //public string Language { get; set; }
-
-        //[BsonElement("textDirection")]
-        //public string TextDirection { get; set; }
-
-        //[BsonElement("processingLanguage")]
-        //public string ProcessingLanguage { get; set; }
     }
 }
