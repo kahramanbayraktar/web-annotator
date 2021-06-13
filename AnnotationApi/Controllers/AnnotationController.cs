@@ -1,6 +1,7 @@
 ﻿using AnnotationApi.Models;
 using AnnotationApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace AnnotationApi.Controllers
@@ -50,7 +51,11 @@ namespace AnnotationApi.Controllers
         [HttpPost]
         public ActionResult<Annotation> Create(Annotation annotation)
         {
+            annotation.Created = DateTime.Now;
             _annotationService.Create(annotation);
+
+            annotation.Id = "https://annotatorapi.azurewebsites.net/annotation/" + annotation.DbId;
+            _annotationService.Update(annotation.DbId, annotation);
 
             return CreatedAtRoute("GetAnnotation", new { id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId }, annotation);
         }

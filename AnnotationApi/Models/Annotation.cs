@@ -10,7 +10,7 @@ namespace AnnotationApi.Models
         /*
         "@context": "http://www.w3.org/ns/anno.jsonld",
         "id": "https://annotator.api/a/60ba011adf1412fe8345a899", // https://annotatorapi.azurewebsites.net/annotation/get/60ba011adf1412fe8345a899
-        "@type": "Annotation",
+        "type": "Annotation",
         "body": "This built-in trigger sends an HTTP request to a URL for a Swagger file that describes a REST API and returns a response that contains that file's content.",
         "created": "2017-11-28T18:56:04.889815+00:00"
         */
@@ -24,19 +24,12 @@ namespace AnnotationApi.Models
         [BsonElement("@context")]
         public string Context { get; set; }
 
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("id")]
         public string Id { get; set; }
 
-        [JsonPropertyName("@type")]
         [BsonElement("type")]
         public string Type { get; set; }
 
-        //[BsonElement("body")]
-        //public Body Body { get; set; }
-
-        [JsonPropertyName("body")]
         [BsonElement("body")]
         public string Body { get; set; }
 
@@ -60,12 +53,8 @@ namespace AnnotationApi.Models
             "nick": "Ann0"
           }
         */
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        [JsonIgnore]
-        public string DbId { get; set; }
 
-        [JsonPropertyName("@id")]
+        [JsonPropertyName("id")]
         [BsonElement("id")]
         public string Id { get; set; }
 
@@ -86,6 +75,7 @@ namespace AnnotationApi.Models
             "language": "fr"
           },
         */
+
         [BsonElement("id")]
         public int Id { get; set; }
 
@@ -101,21 +91,19 @@ namespace AnnotationApi.Models
     {
         /*
         "target": {
-            "@id": "https://analysis.app/analysis/1?xywh=39,18,172,96",
-            "@type": "Image",
+            "id": "https://analysis.app/analysis/1?xywh=39,18,172,96",
+            "type": "Image",
             "format": "image/jpeg"
         }
         */
 
-        [JsonPropertyName("@id")]
+        [JsonPropertyName("id")]
         [BsonElement("id")]
         public string Id { get; set; }
 
-        [JsonPropertyName("@type")]
         [BsonElement("type")]
         public string Type { get; set; }
 
-        [JsonPropertyName("format")]
         [BsonElement("format")]
         public string Format { get; set; }
     }

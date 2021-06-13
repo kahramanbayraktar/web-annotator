@@ -23,13 +23,13 @@ namespace AnnotationApi.Services
         }
 
         public Annotation Get(string id) =>
-            _annotations.Find<Annotation>(annotation => annotation.DbId == id).FirstOrDefault();
+            _annotations.Find(annotation => annotation.DbId == id).FirstOrDefault();
 
         public Annotation GetByAnnotation(string id) =>
-            _annotations.Find<Annotation>(annotation => annotation.Id == id).FirstOrDefault();
+            _annotations.Find(annotation => annotation.Id == id).FirstOrDefault();
 
         public List<Annotation> GetByTarget(string id) =>
-            _annotations.Find<Annotation>(annotation => annotation.Target.Id.StartsWith(id)).ToList();
+            _annotations.Find(annotation => annotation.Target.Id.StartsWith(id)).ToList();
 
         public Annotation Create(Annotation annotation)
         {
@@ -38,12 +38,12 @@ namespace AnnotationApi.Services
         }
 
         public void Update(string id, Annotation annotationIn) =>
-            _annotations.ReplaceOne(annotation => annotation.Id == id, annotationIn);
+            _annotations.ReplaceOne(annotation => annotation.DbId == id, annotationIn);
 
         public void Remove(Annotation annotationIn) =>
-            _annotations.DeleteOne(annotation => annotation.Id == annotationIn.Id);
+            _annotations.DeleteOne(annotation => annotation.DbId == annotationIn.Id);
 
         public void Remove(string id) =>
-            _annotations.DeleteOne(annotation => annotation.Id == id);
+            _annotations.DeleteOne(annotation => annotation.DbId == id);
     }
 }

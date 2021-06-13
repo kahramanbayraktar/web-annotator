@@ -16,7 +16,7 @@
             <div class="annotations col-md-3">
                 @foreach (var a in Model.Annotations)
                 {
-                    <p class="@(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
+                    <p id="@a.Id" class="@(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
                         <a>@a.Body</a>
                         <a class="btn btn-primary btn-sm float-right" href="">Share</a>
                     </p>
