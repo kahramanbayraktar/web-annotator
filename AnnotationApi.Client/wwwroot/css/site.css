@@ -166,11 +166,15 @@ div.annotations {
     float: right;
 }
 
-    div.annotations p {
+    div.annotations div {
         padding: 10px;
         background-color: papayawhip;
     }
 
-        div.annotations p.selected-annot {
+        div.annotations div.selected-annot {
             background-color: cadetblue;
         }
+
+a.share {
+    font-size: 10px;
+}

@@ -1,0 +1,22 @@
+﻿@page
+@model SearchModel
+@{
+    ViewData["Title"] = "Search";
+}
+<h1>@ViewData["Title"]</h1>
+
+@Html.AntiForgeryToken()
+
+<div class="text-center">
+    <div class="col-lg-12">
+        <form id="searchForm" action="/Search">
+            <div class="form-group" >
+                <label for="text">Search words</label>
+                <input type="text" class="form-control" id="text" name="text" placeholder="Enter search words">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <p></p>
+    <div class="col-lg-12" id="result"></div>
+</div>

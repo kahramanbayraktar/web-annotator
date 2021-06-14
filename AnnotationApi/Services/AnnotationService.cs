@@ -1,4 +1,5 @@
-﻿using AnnotationApi.Models;
+﻿using System;
+using AnnotationApi.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 
@@ -30,6 +31,20 @@ namespace AnnotationApi.Services
 
         public List<Annotation> GetByTarget(string id) =>
             _annotations.Find(annotation => annotation.Target.Id.StartsWith(id)).ToList();
+
+        public List<Annotation> Search(string text) //, string startDate, string endDate)
+        {
+            text = text.Trim().ToLower();
+
+            //DateTime.TryParse(startDate, out var start);
+            //DateTime.TryParse(endDate, out var end);
+
+            return _annotations.Find(annotation =>
+                annotation.Creator.Name.ToLower().Contains(text)
+                || annotation.Body.ToLower().Contains(text)
+                //|| start != null && annotation.Created >= start && end != null && annotation.Created <= end
+            ).ToList();
+        }
 
         public Annotation Create(Annotation annotation)
         {

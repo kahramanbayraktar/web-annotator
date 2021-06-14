@@ -16,10 +16,11 @@
             <div class="annotations col-md-3">
                 @foreach (var a in Model.Annotations)
                 {
-                    <p id="@a.Id" class="@(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
+                    <div id="@a.Id" class="@(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
                         <a>@a.Body</a>
-                        <a class="btn btn-primary btn-sm float-right" href="">Share</a>
-                    </p>
+                        <a class="share btn btn-primary btn-sm float-right" href="@a.Target.Id" onclick="share(this)">share</a>
+                    </div>
+                    <hr/>
                 }
             </div>
         </div>
@@ -34,14 +35,14 @@
         </div>
 
         <div class="form-popup" id="annoForm" method="post">
-            <form action="/Index" class="form-container">
+            <form id="addForm" action="/Index" class="form-container">
                 <textarea placeholder="Type your annotation" name="Text" required></textarea>
-                <input type="hidden" id="txtX" name="X"/>
-                <input type="hidden" id="txtY" name="Y"/>
-                <input type="hidden" id="txtW" name="W"/>
-                <input type="hidden" id="txtH" name="H"/>
+                <input type="hidden" id="txtX" name="X" />
+                <input type="hidden" id="txtY" name="Y" />
+                <input type="hidden" id="txtW" name="W" />
+                <input type="hidden" id="txtH" name="H" />
 
-                <input type="hidden" name="TargetId" value="@Model.TargetId"/>
+                <input type="hidden" name="TargetId" value="@Model.TargetId" />
 
                 <button type="submit" class="btn">Send</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>

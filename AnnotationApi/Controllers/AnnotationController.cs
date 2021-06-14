@@ -49,12 +49,25 @@ namespace AnnotationApi.Controllers
         }
 
         [HttpPost]
+        public ActionResult<List<Annotation>> Search(Search search)
+        {
+            var annotations = _annotationService.Search(search.Text);
+
+            if (annotations == null)
+            {
+                return NotFound();
+            }
+
+            return annotations;
+        }
+
+        [HttpPost]
         public ActionResult<Annotation> Create(Annotation annotation)
         {
             annotation.Created = DateTime.Now;
             _annotationService.Create(annotation);
 
-            annotation.Id = "https://annotatorapi.azurewebsites.net/annotation/" + annotation.DbId;
+            annotation.Id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId;
             _annotationService.Update(annotation.DbId, annotation);
 
             return CreatedAtRoute("GetAnnotation", new { id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId }, annotation);
