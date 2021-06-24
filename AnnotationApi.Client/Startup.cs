@@ -45,6 +45,7 @@ namespace AnnotationApi.Client
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

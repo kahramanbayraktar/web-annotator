@@ -175,6 +175,10 @@ div.annotations {
             background-color: cadetblue;
         }
 
-a.share {
-    font-size: 10px;
+.buttons {
+    display: none;
+}
+
+.annot:hover .buttons {
+    display: flex;
 }

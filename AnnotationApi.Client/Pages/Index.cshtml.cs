@@ -138,5 +138,22 @@ namespace AnnotationApi.Client.Pages
                 throw;
             }
         }
+
+        public async Task<IActionResult> OnDeleteAnnotation(string id)
+        {
+            try
+            {
+                var client = new HttpClient();
+
+                using var response = await client.DeleteAsync($"{_endPoint}/annotation/delete/{id}");
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                return new JsonResult(apiResponse);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

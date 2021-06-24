@@ -10,22 +10,30 @@
 {
     <div class="text-center">
         <div class="row">
-            <div id="img-container" class="graph col-md-9">
+            <div class="graph col-md-9" id="img-container">
                 <img id="img-analysis" src="@Model.ImageUrl" alt="kitten">
             </div>
             <div class="annotations col-md-3">
                 @foreach (var a in Model.Annotations)
                 {
-                    <div id="@a.Id" class="@(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "")" onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
-                        <a>@a.Body</a>
-                        <a class="share btn btn-primary btn-sm float-right" href="@a.Target.Id" onclick="share(this)">share</a>
+                    <div id="@a.Id" class="annot @(Model.SelectedAnnot != null && Model.SelectedAnnot.DbId == a.DbId ? "selected-annot" : "") form-inline"
+                         onmouseover="drawRect(@a.Target.X, @a.Target.Y, @a.Target.W, @a.Target.H)" onmouseout="clearRect()">
+                        <div>
+                            <a>@a.Body</a>
+                        </div>
+                        <div class="buttons form-inline col-lg-12">
+                            <div class="col-lg-6">
+                                <a class="share text-primary" href="@a.Target.Id"><i class="fas fa-share-alt"></i></a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a class="delete text-danger" href="@a.Id"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    <hr/>
+                    <hr />
                 }
             </div>
         </div>
-
-        <canvas id="canvas" width="500" height="500"></canvas>
 
         <div class="text-left">
             <label id="lblX"></label>
@@ -35,7 +43,7 @@
         </div>
 
         <div class="form-popup" id="annoForm" method="post">
-            <form id="addForm" action="/Index" class="form-container">
+            <form id="addForm" class="form-container">
                 <textarea placeholder="Type your annotation" name="Text" required></textarea>
                 <input type="hidden" id="txtX" name="X" />
                 <input type="hidden" id="txtY" name="Y" />

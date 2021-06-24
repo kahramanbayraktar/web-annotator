@@ -24,6 +24,7 @@ namespace AnnotationApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ActionName(nameof(Get))]
         public ActionResult<Annotation> Get(string id)
         {
             var annotation = _annotationService.Get(id);
@@ -70,7 +71,8 @@ namespace AnnotationApi.Controllers
             annotation.Id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId;
             _annotationService.Update(annotation.DbId, annotation);
 
-            return CreatedAtRoute("GetAnnotation", new { id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId }, annotation);
+            //return CreatedAtRoute("Get", new { id = "https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId }, annotation);
+            return Ok("https://annotatorapi.azurewebsites.net/annotation/get/" + annotation.DbId);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -98,7 +100,7 @@ namespace AnnotationApi.Controllers
                 return NotFound();
             }
 
-            _annotationService.Remove(annotation.Id);
+            _annotationService.Remove(annotation.DbId);
 
             return NoContent();
         }
