@@ -24,16 +24,11 @@ namespace AnnotationApi
             // requires using Microsoft.Extensions.Options
             services.Configure<AnnotationDatabaseSettings>(
                 Configuration.GetSection(nameof(AnnotationDatabaseSettings)));
-            services.Configure<FlightDatabaseSettings>(
-                Configuration.GetSection(nameof(FlightDatabaseSettings)));
 
             services.AddSingleton<IAnnotationDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<AnnotationDatabaseSettings>>().Value);
-            services.AddSingleton<IFlightDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<FlightDatabaseSettings>>().Value);
 
             services.AddSingleton<AnnotationService>();
-            services.AddSingleton<RouteService>();
 
             services.AddControllers();
         }

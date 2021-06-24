@@ -1,5 +1,4 @@
-﻿using System;
-using AnnotationApi.Models;
+﻿using AnnotationApi.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 
