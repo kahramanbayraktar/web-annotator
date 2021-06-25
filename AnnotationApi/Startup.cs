@@ -28,7 +28,7 @@ namespace AnnotationApi
             services.AddSingleton<IAnnotationDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<AnnotationDatabaseSettings>>().Value);
 
-            services.AddSingleton<AnnotationService>();
+            services.AddSingleton<IAnnotationService, AnnotationService>();
 
             services.AddControllers();
         }

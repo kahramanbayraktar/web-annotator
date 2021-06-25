@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnnotationApi.Tests", "Anno
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnnotationApi.Client", "AnnotationApi.Client\AnnotationApi.Client.csproj", "{7481648F-9B0A-4707-8612-4B8D06D41A85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnnotationApi.Client.Tests", "AnnotationApi.Client.Tests\AnnotationApi.Client.Tests.csproj", "{883585B9-EF75-40AA-BCDF-2438B29FBF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnnotationApi.Client.Tests", "AnnotationApi.Client.Tests\AnnotationApi.Client.Tests.csproj", "{883585B9-EF75-40AA-BCDF-2438B29FBF4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnnotationApi.IntegrationTests", "AnnotationApi.IntegrationTests\AnnotationApi.IntegrationTests.csproj", "{DD142242-78DC-4A25-9001-63E1545E9543}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{883585B9-EF75-40AA-BCDF-2438B29FBF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{883585B9-EF75-40AA-BCDF-2438B29FBF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{883585B9-EF75-40AA-BCDF-2438B29FBF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD142242-78DC-4A25-9001-63E1545E9543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD142242-78DC-4A25-9001-63E1545E9543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD142242-78DC-4A25-9001-63E1545E9543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD142242-78DC-4A25-9001-63E1545E9543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

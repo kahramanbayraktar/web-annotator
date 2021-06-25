@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace AnnotationApi.Models
 {
-    public class Annotation
+    public class Annotation : IAnnotation
     {
         /*
         "@context": "http://www.w3.org/ns/anno.jsonld",
@@ -41,70 +41,5 @@ namespace AnnotationApi.Models
 
         [BsonElement("created")]
         public DateTime Created { get; set; }
-    }
-
-    [BsonNoId]
-    public class Creator
-    {
-        /*
-        "creator": {
-            "id": "http://example.org/user1",
-            "name": "Anne O'Tater",
-            "nick": "Ann0"
-          }
-        */
-
-        [JsonPropertyName("id")]
-        [BsonElement("id")]
-        public string Id { get; set; }
-
-        [BsonElement("name")]
-        public string Name { get; set; }
-
-        [BsonElement("nick")]
-        public string Nick { get; set; }
-    }
-
-    [BsonNoId]
-    public class Body
-    {
-        /*
-        "body": {
-            "id": "http://example.org/analysis1.mp3",
-            "format": "audio/mpeg",
-            "language": "fr"
-          },
-        */
-
-        [BsonElement("id")]
-        public int Id { get; set; }
-
-        [BsonElement("format")]
-        public string Format { get; set; }
-
-        [BsonElement("language")]
-        public string Language { get; set; }
-    }
-
-    [BsonNoId]
-    public class Target
-    {
-        /*
-        "target": {
-            "id": "https://analysis.app/analysis/1?xywh=39,18,172,96",
-            "type": "Image",
-            "format": "image/jpeg"
-        }
-        */
-
-        [JsonPropertyName("id")]
-        [BsonElement("id")]
-        public string Id { get; set; }
-
-        [BsonElement("type")]
-        public string Type { get; set; }
-
-        [BsonElement("format")]
-        public string Format { get; set; }
     }
 }

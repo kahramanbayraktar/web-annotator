@@ -4,34 +4,34 @@ using System.Collections.Generic;
 
 namespace AnnotationApi.Services
 {
-    public class AnnotationService
+    public class AnnotationService : IAnnotationService
     {
-        private readonly IMongoCollection<Annotation> _annotations;
+        private readonly IMongoCollection<IAnnotation> _annotations;
 
         public AnnotationService(IAnnotationDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _annotations = database.GetCollection<Annotation>(settings.AnnotationsCollectionName);
+            _annotations = database.GetCollection<IAnnotation>(settings.AnnotationsCollectionName);
         }
 
-        public List<Annotation> Get()
+        public List<IAnnotation> Get()
         {
             var annotations = _annotations.Find(r => true).ToList();
             return annotations;
         }
 
-        public Annotation Get(string id) =>
+        public IAnnotation Get(string id) =>
             _annotations.Find(annotation => annotation.DbId == id).FirstOrDefault();
 
-        public Annotation GetByAnnotation(string id) =>
+        public IAnnotation GetByAnnotation(string id) =>
             _annotations.Find(annotation => annotation.Id == id).FirstOrDefault();
 
-        public List<Annotation> GetByTarget(string id) =>
+        public List<IAnnotation> GetByTarget(string id) =>
             _annotations.Find(annotation => annotation.Target.Id.StartsWith(id)).ToList();
 
-        public List<Annotation> Search(string text) //, string startDate, string endDate)
+        public List<IAnnotation> Search(string text) //, string startDate, string endDate)
         {
             text = text.Trim().ToLower();
 
@@ -45,16 +45,16 @@ namespace AnnotationApi.Services
             ).ToList();
         }
 
-        public Annotation Create(Annotation annotation)
+        public IAnnotation Create(IAnnotation annotation)
         {
             _annotations.InsertOne(annotation);
             return annotation;
         }
 
-        public void Update(string id, Annotation annotationIn) =>
+        public void Update(string id, IAnnotation annotationIn) =>
             _annotations.ReplaceOne(annotation => annotation.DbId == id, annotationIn);
 
-        public void Remove(Annotation annotationIn) =>
+        public void Remove(IAnnotation annotationIn) =>
             _annotations.DeleteOne(annotation => annotation.DbId == annotationIn.Id);
 
         public void Remove(string id) =>

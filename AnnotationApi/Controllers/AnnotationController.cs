@@ -10,22 +10,22 @@ namespace AnnotationApi.Controllers
     [Route("[controller]/[action]")]
     public class AnnotationController : ControllerBase
     {
-        private readonly AnnotationService _annotationService;
+        private readonly IAnnotationService _annotationService;
 
-        public AnnotationController(AnnotationService annotationService)
+        public AnnotationController(IAnnotationService annotationService)
         {
             _annotationService = annotationService;
         }
 
         [HttpGet]
-        public ActionResult<List<Annotation>> Get()
+        public ActionResult<List<IAnnotation>> Get()
         {
             return _annotationService.Get();
         }
 
         [HttpGet("{id}")]
         [ActionName(nameof(Get))]
-        public ActionResult<Annotation> Get(string id)
+        public ActionResult<IAnnotation> Get(string id)
         {
             var annotation = _annotationService.Get(id);
 
@@ -34,10 +34,10 @@ namespace AnnotationApi.Controllers
                 return NotFound();
             }
 
-            return annotation;
+            return (Annotation)annotation;
         }
 
-        public ActionResult<List<Annotation>> GetByTarget(string id)
+        public ActionResult<List<IAnnotation>> GetByTarget(string id)
         {
             var annotations = _annotationService.GetByTarget(id);
 
@@ -50,7 +50,7 @@ namespace AnnotationApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<List<Annotation>> Search(Search search)
+        public ActionResult<List<IAnnotation>> Search(Search search)
         {
             var annotations = _annotationService.Search(search.Text);
 
@@ -63,7 +63,7 @@ namespace AnnotationApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Annotation> Create(Annotation annotation)
+        public ActionResult<IAnnotation> Create(IAnnotation annotation)
         {
             annotation.Created = DateTime.Now;
             _annotationService.Create(annotation);
@@ -76,7 +76,7 @@ namespace AnnotationApi.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Annotation annotationIn)
+        public IActionResult Update(string id, IAnnotation annotationIn)
         {
             var annotation = _annotationService.Get(id);
 
